@@ -34,6 +34,7 @@ RM			= @rm -f
 	${CC} ${CFLAGS} -I/usr/include -Imlx_linux -Ilibft -Iincludes -c $< -o ${<:.c=.o}
 
 ${NAME}:		 ${OBJS}
+	@${RM} saves/deleteme
 	@echo "Compiling ressources needed to create the executable.It should take few seconds.."
 	@make --no-print-directory -C mlx_linux
 	@make --no-print-directory -C libft
