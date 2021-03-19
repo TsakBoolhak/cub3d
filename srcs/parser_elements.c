@@ -21,28 +21,26 @@ int	set_resolution(char *line, t_cub *cub)
 
 	tab = ft_split(line, ' ');
 	if (!tab)
-		return (return_error("MEM ERROR: Couldn't allocate memory\n", 0));
+		return (return_error("Error\nCouldn't allocate memory\n", 0));
 	if (ft_tab_size(tab) != 2)
 	{
 		ft_free_tab((void **)tab);
-		return (return_error("PARSING ERROR: Wrong resolution\n", 0));
+		return (return_error("Error\nResolution must contain 2 values\n", 0));
 	}
 	cub->width = ft_atoi(tab[0]);
 	cub->height = ft_atoi(tab[1]);
 	if (!ft_strisdigit(tab[0]) || !ft_strisdigit(tab[1])
-		|| !cub->width || !cub->height)
+		|| cub->width < 1 || cub->height < 1)
 	{
 		ft_free_tab((void **)tab);
-		return (return_error("PARSING ERROR: Wrong resolution\n", 0));
+		ft_putstr_fd("Error\nResolution's values must be positive", 2);
+		return (return_error(" numbers\n", 0));
 	}
-	if (ft_strlen(tab[0]) > 5 || cub->width > 15360)
-		cub->width = 15360;
-	if (ft_strlen(tab[1]) > 4 || cub->height > 8640)
-		cub->height = 8640;
 	ft_free_tab((void **)tab);
 	return (1);
 }
 
+#include <stdio.h>
 int	set_texture(char *line, int elem, t_cub *cub)
 {
 	char	*trimmed;
@@ -50,11 +48,14 @@ int	set_texture(char *line, int elem, t_cub *cub)
 
 	trimmed = ft_strtrim(line, " \t");
 	if (!trimmed)
-		return (return_error("MEM ERROR: Couldn't allocate memory\n", 0));
+		return (return_error("Error\nCouldn't allocate memory\n", 0));
 	tex.img = mlx_xpm_file_to_image(cub->mlx, trimmed, &tex.len, &tex.height);
 	free(trimmed);
 	if (!tex.img)
-		return (return_error("PARSING ERROR: Couldn't import texture\n", 0));
+	{
+		printf("%s\n", trimmed);
+		return (return_error("Error\nCouldn't import texture\n", 0));
+	}
 	tex.addr = mlx_get_data_addr(tex.img, &tex.bpp, &tex.len, &tex.end);
 	if (elem == 3)
 		cub->sprite = tex;
@@ -80,16 +81,17 @@ int	check_colour_values(char **tab)
 	{
 		value = ft_strtrim(tab[i], " ");
 		if (!value)
-			return (return_error("MEM ERROR: Couldn't allocate memory\n", -1));
+			return (return_error("Error\nCouldn't allocate memory\n", -1));
 		if (ft_strlen(value) > 3 || !ft_strisdigit(value))
 		{
 			free(value);
-			return (return_error("PARSING ERROR: Wrong color value\n", -1));
+			ft_putstr_fd("Error\nColor's values must be numbers", 2);
+			return (return_error(" included between 0 and 255\n", -1));
 		}
 		rgb[i] = ft_atoi(value);
 		free(value);
 		if (rgb[i] > 255)
-			return (return_error("PARSING ERROR: Wrong color value\n", -1));
+			return (return_error("Error\nColor's value is above 255\n", -1));
 		i++;
 	}
 	return (argb_to_int(0, rgb[0], rgb[1], rgb[2]));
@@ -101,12 +103,13 @@ int	set_colour(char *line, int elem, t_cub *cub)
 	int		color;
 
 	if (ft_count_char_in_str(line, ',') != 2)
-		return (return_error("PARSING ERROR: Wrong color line\n", 0));
+		return (return_error("Error\nToo many commas in color's line\n", 0));
 	tab = ft_split(line, ',');
 	if (ft_tab_size(tab) != 3)
 	{
 		ft_free_tab((void *)tab);
-		return (return_error("PARSING ERROR: Wrong color line\n", 0));
+		ft_putstr_fd("Error\nColor must contain 3 values, included between", 2);
+		return (return_error("0 and 255, separated by commas\n", 0));
 	}
 	color = check_colour_values(tab);
 	if (!elem)
@@ -114,8 +117,6 @@ int	set_colour(char *line, int elem, t_cub *cub)
 	else
 		cub->ceil_rgb = color;
 	ft_free_tab((void **)tab);
-	if (color < 0)
-		return (0);
 	return (1);
 }
 
@@ -137,13 +138,13 @@ int	set_elem(char *line, t_cub *cub, int *elements)
 		elem = 4;
 	else if (!ft_strncmp(line, "SO", 2))
 		elem = 5;
-	else if (!ft_strncmp(line, "S", 1))
-		elem = 3;
 	else if (!ft_strncmp(line, "EA", 2))
 		elem = 6;
+	else if (!ft_strncmp(line, "S", 1))
+		elem = 3;
 	else if (!ft_strncmp(line, "WE", 2))
 		elem = 7;
 	else
-		return (return_error("PARSING ERROR: Unknown parameter's id\n", -1));
+		return (return_error("Error\nUnknown parameter's id\n", -1));
 	return (check_elem(line, elem, cub, elements));
 }

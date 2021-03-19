@@ -75,21 +75,21 @@ int	map_init(int fd, char **line, t_cub *cub)
 	ret = 1;
 	while (ret > 0)
 	{
-		ret = get_next_line(fd, line, 0);
-		if (ret < 0)
-			return (return_error("READING ERROR: Couldn't read file\n", -1));
-		if (!ret)
-			break ;
 		cub->map_h++;
 		len = (int)ft_strlen(*line);
 		if (cub->map_w < len)
 			cub->map_w = len;
 		cub->map = ft_add_str_to_tab(cub->map, *line);
 		if (!cub->map)
-			return (return_error("MEM ERROR: Couldn't allocate memory\n", -1));
+			return (return_error("Error\nCouldn't allocate memory\n", -1));
+		ret = get_next_line(fd, line, 0);
+		if (ret < 0)
+			return (return_error("Error\nCouldn't read file\n", -1));
+		if (!ret)
+			break ;
 	}
 	if (cub->map_w < 3 || cub->map_h < 3)
-		return (return_error("MAP ERROR: Map is too small to be valid\n", -1));
+		return (return_error("Error\nMap is too small to be valid\n", -1));
 	else
 		return (0);
 }
