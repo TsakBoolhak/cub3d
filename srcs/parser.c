@@ -20,7 +20,7 @@ int	check_elem(char *line, int elem, t_cub *cub, int *elements)
 {
 	int	tag_len;
 
-	tag_len = 1 + (elem > 3);
+	tag_len = 2 + (elem > 3);
 	if (elements[elem])
 		return (return_error("Error\nSame element's ID twice\n", -1));
 	else if (elem < 2)
@@ -55,7 +55,6 @@ int	check_elements(int *elements)
 	return (1);
 }
 
-#include <stdio.h>
 int	elements_parser(int fd, char **line, t_cub *cub)
 {
 	int		ret;

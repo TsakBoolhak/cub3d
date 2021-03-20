@@ -16,6 +16,7 @@
 # include <stddef.h>
 
 int		ft_atoi(const char *str);
+int		ft_atoi_n(const char *str, size_t n);
 int		ft_check_base(char *base);
 int		ft_get_signed_nb_len(long nb, int base);
 size_t	ft_abs(long nb);

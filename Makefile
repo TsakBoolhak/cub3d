@@ -22,7 +22,7 @@ SRCS		= ${SRCFOLD}parser.c \
 
 OBJS		= ${SRCS:.c=.o}
 
-NAME		= cub3d
+NAME		= cub3D
 
 CC			= @gcc
 
@@ -34,12 +34,11 @@ RM			= @rm -f
 	${CC} ${CFLAGS} -I/usr/include -Imlx_linux -Ilibft -Iincludes -c $< -o ${<:.c=.o}
 
 ${NAME}:		 ${OBJS}
-	@${RM} saves/deleteme
 	@echo "Compiling ressources needed to create the executable.It should take few seconds.."
 	@make --no-print-directory -C mlx_linux
 	@make --no-print-directory -C libft
-	${CC} ${CFLAGS} ${OBJS} -Lmlx_linux -lmlx_Linux -L/usr/lib -Llibft -Imlx_linux -lft -lXext -lX11 -lm -lz -o ${NAME}
-	@echo "Game is ready to be launched\n\nTo launch, type \"${NAME} file.cub\"\nIf you add --save option, it will save an image representing the first frame of the game into a .bmp file stored in saves/ directory"
+	@${CC} ${CFLAGS} ${OBJS} -Lmlx_linux -lmlx_Linux -L/usr/lib -Llibft -Imlx_linux -lft -lXext -lX11 -lm -lz -o ${NAME}
+	@echo "Game is ready to be launched\n\nTo launch, type \"${NAME} file.cub\"\nUse --save option to save the first frame of the game into a bitmap that will be stored into saves/ directory"
 
 all:			${NAME}
 

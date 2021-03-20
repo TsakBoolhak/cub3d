@@ -92,6 +92,7 @@ int		rgb_to_r(int rgb);
 int		rgb_to_g(int rgb);
 int		rgb_to_b(int rgb);
 int		argb_to_int(int a, int r, int g, int b);
+int		check_overflow(char *nb);
 
 /*
 ***utils3.c

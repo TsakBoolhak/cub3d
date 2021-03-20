@@ -10,6 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <limits.h>
+#include <stdlib.h>
+#include "libft.h"
+
 int	rgb_to_r(int rgb)
 {
 	int	r;
@@ -37,4 +41,33 @@ int	rgb_to_b(int rgb)
 int	argb_to_int(int a, int r, int g, int b)
 {
 	return ((a << 24) + (r << 16) + (g << 8) + b);
+}
+
+#include <stdio.h>
+
+int		check_overflow(char *nb)
+{
+	char	*max_int;
+	int		max_len;
+	int		nb_len;
+	int	 	ret;
+
+	if (!nb)
+		return (-1);
+	max_int = ft_longtoa_base(INT_MAX, "0123456789");
+	if (!max_int)
+		return (-1);
+	ret = 0;
+	max_len = ft_strlen(max_int);
+	nb_len = ft_strlen(nb);
+	if (nb_len > max_len)
+		ret = -1;
+	else if (nb_len == max_len)
+	{
+		if (ft_atoi_n(max_int, max_len - 1) < ft_atoi_n(nb, nb_len - 1)
+			|| (ft_atoi_n(max_int, max_len - 1) == ft_atoi_n(nb, nb_len - 1) 
+				&& nb[nb_len - 1] > max_int[max_len - 1])) 
+			ret = -1;
+	}
+	return (ret);
 }

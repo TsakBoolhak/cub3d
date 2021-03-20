@@ -17,6 +17,7 @@ SRCS_PRINT = ft_putchar_fd.c \
 			ft_putnbr_fd.c
 
 SRCS_TOOLS 	= ft_atoi.c \
+			ft_atoi_n.c \
 			ft_get_signed_nb_len.c \
 			ft_check_base.c \
 			ft_abs.c
