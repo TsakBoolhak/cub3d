@@ -1,0 +1,10 @@
+ R          1920 1080  
+        NO           ./textures/Doom.xpm
+SO         ./textures/Wolf.xpm
+WE ./textures/Catacomb.xpm
+               EA ./textures/Blackstone.xpm
+S    ./textures/tree.xpm
+F   72,56,24
+C 17, 55, 99
+
+E
