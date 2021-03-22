@@ -5,8 +5,8 @@ t_pos	closest_hit(t_pos orig, t_pos x_pos, t_pos y_pos, t_cub *cub)
 {
 	t_pos	dist;
 
-	dist.y = sqrt(pow(orig.x - y_pos.x, 2.0) + pow(orig.y - y_pos.y, 2.0));
-	dist.x = sqrt(pow(orig.x - x_pos.x, 2.0) + pow(orig.y - x_pos.y, 2.0));
+	dist.y = sqrt(pow(orig.x - y_pos.x, 2) + pow(orig.y - y_pos.y, 2));
+	dist.x = sqrt(pow(orig.x - x_pos.x, 2) + pow(orig.y - x_pos.y, 2));
 	if (dist.x < dist.y)
 	{
 		cub->ray.hit_dist = dist.x;
@@ -42,8 +42,8 @@ double	get_screen_dist(int width)
 	double	rad;
 	double	half_width;
 
-	rad = degree_to_radiant(FOV / 2.0);
-	half_width = (double)(width) / 2.0;
+	rad = degree_to_radiant(FOV / 2);
+	half_width = (double)(width) / 2;
 	return (half_width / tan(rad));
 }
 
@@ -81,7 +81,6 @@ void	raycast_loop(t_cub *cub)
 		init_sprites_dist(cub->sprites, cub);
 		ray->hit = get_wall_hit(cub->player, ray->fov_angle, cub);
 		sort_sprite_tab(cub->sprites);
-		draw_ray_to_minimap(cub);
 		ray->fish = ray->fov_angle - cub->player.dir;
 		if (ray->fish < 0.0)
 			ray->fish *= -1.0;

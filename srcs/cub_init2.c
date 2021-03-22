@@ -1,6 +1,5 @@
 #include <mlx.h>
 #include <math.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include "cub3d.h"
 #include "libft.h"
@@ -102,7 +101,5 @@ int	prepare_run(t_cub *cub)
 		return (return_error("ERROR: Couldn't create the window\n", -1));
 	}
 	cub->ray.screen_dist = get_screen_dist(cub->width);
-	if (mini_map_to_img(cub) == -1)
-		printf("The screen is too small to draw minimap\n");
 	return (0);
 }

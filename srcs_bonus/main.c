@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <mlx.h>
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 #include "libft.h"
 
 char	*get_save_path(char *cubpath, t_cub *cub)

@@ -25,6 +25,15 @@ typedef struct s_pos
 	double	dir;
 }t_pos;
 
+typedef struct s_minimap
+{
+	t_data	minimap;
+	int		map_px_w;
+	int		map_px_h;
+	int		cell_px_w;
+	int		cell_px_h;
+}t_minimap;
+
 typedef struct s_ray
 {
 	double	rad;
@@ -97,6 +106,7 @@ typedef struct s_cub
 	t_data		sprite;
 	t_pos		player;
 	t_sprite	**sprites;
+	t_minimap	minmap;
 	t_data		screen;
 	t_ray		ray;
 	t_action	action;

@@ -59,8 +59,6 @@ void	free_cub(t_cub *cub)
 		mlx_destroy_image(cub->mlx, cub->screen.img);
 	if (cub->draw_buf)
 		free(cub->draw_buf);
-	if (cub->minmap.minimap.img)
-		mlx_destroy_image(cub->mlx, cub->minmap.minimap.img);
 	if (cub->win)
 		mlx_destroy_window(cub->mlx, cub->win);
 	mlx_destroy_display(cub->mlx);

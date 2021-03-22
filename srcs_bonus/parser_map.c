@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 #include <stdlib.h>
 
 int	check_around_cell(int x, int y, t_cub *cub)

@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 #include <math.h>
 
 int	get_sprite_pixel(int *y, t_sprite *sprite, t_cub *cub)

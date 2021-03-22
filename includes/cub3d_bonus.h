@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 # include <stddef.h>
-# include "structures.h"
+# include "structures_bonus.h"
 
 # define FOV 60.0
 
@@ -42,6 +42,15 @@ void	init_header(t_bmp *bmp, t_cub *cub);
 void	get_first_image(t_cub *cub);
 int		write_into_bmp(int fd, t_bmp *bmp, t_cub *cub);
 int		generate_bmp_file(t_cub *cub, char *savename);
+
+/*
+***minimap.c
+*/
+int		set_mini_map_color(int column, int line, char **map);
+void	fill_mini_map_line(t_cub *cub, int line);
+int		set_minimap_dimensions(t_cub *cub);
+int		mini_map_to_img(t_cub *cub);
+void	draw_pos_to_map(t_minimap *map, t_cub *cub, t_pos pos, int clr);
 
 /*
 ***parser.c
@@ -96,6 +105,15 @@ int		get_x_vector(double dir);
 int		get_y_vector(double dir);
 double	get_rad_for_x_cross(double dir);
 double	get_rad_for_y_cross(double dir);
+
+/*
+***draw_utils.c
+*/
+void	init_draw_line(t_coord *d, t_coord *s, t_coord start, t_coord end);
+void	draw_line(t_coord start, t_coord end, t_data *data, int color);
+void	print_sprite_tab(t_sprite **sprites);
+void	draw_sprite_to_minimap(t_cub *cub, t_sprite *sprite);
+void	draw_ray_to_minimap(t_cub *cub);
 
 /*
 ***draw.c

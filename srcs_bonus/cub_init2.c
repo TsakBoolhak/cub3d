@@ -2,7 +2,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 #include "libft.h"
 
 int	init_window(t_cub *cub)

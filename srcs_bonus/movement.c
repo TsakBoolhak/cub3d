@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 #include <mlx.h>
 
 void	set_step_increm(t_pos step, t_pos *increm, t_cub *cub)
@@ -42,9 +42,15 @@ void	move_advance(t_cub *cub, int forward, int side)
 	set_step_increm(step, &increm, cub);
 	step.x = cub->player.x + increm.x;
 	step.y = cub->player.y + increm.y;
-	if ((int)step.x > 0 && (int)step.x < cub->map_w - 1)
+	if ((int)step.x > 0 && (int)step.x < cub->map_w - 1
+		&& cub->map[(int)cub->player.y][(int)step.x] != '1'
+		&& cub->map[(int)cub->player.y][(int)step.x] != ' '
+		&& cub->map[(int)cub->player.y][(int)step.x] != '2')
 		cub->player.x = step.x;
-	if ((int)step.y > 0 && (int)step.y < cub->map_h - 1)
+	if ((int)step.y > 0 && (int)step.y < cub->map_h - 1
+		&& cub->map[(int)step.y][(int)cub->player.x] != '1'
+		&& cub->map[(int)step.y][(int)cub->player.x] != ' '
+		&& cub->map[(int)step.y][(int)cub->player.x] != '2')
 		cub->player.y = step.y;
 }
 

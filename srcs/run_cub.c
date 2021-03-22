@@ -20,7 +20,6 @@ void	check_actions(t_cub *cub)
 int	render_frame(void *cub_ptr)
 {
 	t_cub	*cub;
-	int		player_color;
 
 	cub = (t_cub *)cub_ptr;
 	check_actions(cub);
@@ -28,17 +27,8 @@ int	render_frame(void *cub_ptr)
 	if (cub->ray.fov_angle < 0.0)
 		cub->ray.fov_angle = 360.0 + cub->ray.fov_angle;
 	cub->ray.angle_increm = FOV / cub->width;
-	if (cub->minmap.minimap.img)
-		mlx_destroy_image(cub->mlx, cub->minmap.minimap.img);
-	mini_map_to_img(cub);
 	raycast_loop(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->screen.img, 0, 0);
-	if (cub->minmap.minimap.img)
-	{
-		player_color = argb_to_int(0, 255, 0, 0);
-		draw_pos_to_map(&cub->minmap, cub, cub->player, player_color);
-		mlx_put_image_to_window(cub->mlx, cub->win, cub->minmap.minimap.img, 0, 0);
-	}
 	return (0);
 }
 

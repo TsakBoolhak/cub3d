@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 #include <math.h>
 
 t_pos	closest_hit(t_pos orig, t_pos x_pos, t_pos y_pos, t_cub *cub)
