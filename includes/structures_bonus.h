@@ -72,6 +72,17 @@ typedef struct s_sprite
 	t_coord	coord;
 }t_sprite;
 
+typedef struct s_health
+{
+	int		health;
+	int		height;
+	int		width;
+	int		border;
+	int		border_color;
+	t_coord	pos;
+	t_data	img;
+}t_health;
+
 typedef struct s_bmp
 {
 	char		bmpsign[2];
@@ -110,6 +121,7 @@ typedef struct s_cub
 	t_data		screen;
 	t_ray		ray;
 	t_action	action;
+	t_health	health;
 	int			true_wall_h;
 	double		movespeed;
 	char		*draw_buf;
