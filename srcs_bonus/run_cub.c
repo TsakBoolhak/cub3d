@@ -58,7 +58,7 @@ int	run_cub(t_cub *cub)
 		return (return_error("ERROR: Couldnt create the game render\n", -1));
 	}
 	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->len, &img->end);
-	cub->movespeed = 0.25;
+	cub->movespeed = 0.15;
 	mlx_loop_hook(cub->mlx, &render_frame, cub);
 	mlx_hook(cub->win, 2, 1L << 0, &handle_keypress, cub);
 	mlx_hook(cub->win, 3, 1L << 1, &handle_keyrelease, cub);

@@ -76,7 +76,12 @@ bonus:			${NAME_BONUS}
 
 clean:
 	@echo "Cleaning files"
-	${RM} ${OBJS} ${OBJS_BONUS}
+	${RM} ${OBJS}
+	@make clean --no-print-directory -C libft/
+
+clean_bonus:
+	@echo "Cleaning files"
+	${RM} ${OBJS_BONUS}
 	@make clean --no-print-directory -C libft/
 
 fclean:			clean
@@ -84,6 +89,13 @@ fclean:			clean
 	@make clean --no-print-directory  -C mlx_linux/
 	@make fclean --no-print-directory -C libft/
 
+fclean_bonus:			clean_bonus
+	${RM} ${NAME_BONUS}
+	@make clean --no-print-directory  -C mlx_linux/
+	@make fclean --no-print-directory -C libft/
+
 re:				fclean all
+
+re_bonus:		fclean_bonus bonus
 
 .PHONY:			all clean fclean re

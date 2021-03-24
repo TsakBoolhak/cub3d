@@ -17,13 +17,13 @@ int	init_window(t_cub *cub)
 		cub->height = height;
 	cub->win = mlx_new_window(cub->mlx, cub->width, cub->height, "cub3d");
 	cub->draw_buf = (char *)malloc(cub->height);
-	cub->health.health = 99;
-	cub->health.height = (int)(10.0 / 100 * cub->height);
-	cub->health.width = (int)(30.0 / 100 * cub->width);
+	cub->health.health = 100;
+	cub->health.height = (int)(8.0 / 100 * cub->height);
+	cub->health.width = (int)(24.0 / 100 * cub->width);
 	cub->health.border = (cub->health.height > 2 && cub->health.width > 2) + (int)(10.0 / 100 * cub->health.height);
 	cub->health.border_color = argb_to_int(0, 161, 155, 27);
-	cub->health.pos.x = 0;
-	cub->health.pos.y = cub->height - cub->health.height - 1;
+	cub->health.pos.x = cub->width - cub->health.width;
+	cub->health.pos.y = 0;
 	if (cub->health.height > 0 && cub->health.width > 0)
 	{
 		cub->health.img.img = mlx_new_image(cub->mlx, cub->health.width, cub->health.height);
@@ -31,7 +31,6 @@ int	init_window(t_cub *cub)
 			return (-1);
 		cub->health.img.addr = mlx_get_data_addr(cub->health.img.img, &cub->health.img.bpp, &cub->health.img.len, &cub->health.img.end);
 	}
-	printf("Health bar: %d health, %d pixel height , %d pixel_width, %d border width, pos y %d/ %d cub height\n", cub->health.health, cub->health.height, cub->health.width, cub->health.border, cub->health.pos.y, cub->height);
 	if (!cub->win || !cub->draw_buf)
 		return (-1);
 	else

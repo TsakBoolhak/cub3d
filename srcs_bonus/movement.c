@@ -1,4 +1,5 @@
 #include "cub3d_bonus.h"
+#include "libft.h"
 #include <mlx.h>
 
 void	set_step_increm(t_pos step, t_pos *increm, t_cub *cub)
@@ -27,6 +28,95 @@ void	set_step_increm(t_pos step, t_pos *increm, t_cub *cub)
 	increm->y *= cub->movespeed;
 }
 
+void	set_next_step(t_pos next_step, t_pos *player, t_cub *cub)
+{
+	char	c;
+	t_coord	vector;
+
+	vector.x = (next_step.x > player->x);
+	vector.y = (next_step.y > player->y);
+	if (next_step.x < 1.25)
+		next_step.x = 1.25;
+	else if (next_step.x >= (double)(cub->map_w) - 1.25)
+		next_step.x = (double)(cub->map_w) - 1.25;
+	if (next_step.y < 1.25)
+		next_step.y = 1.25;
+	else if (next_step.y >= (double)(cub->map_w) - 1.25)
+		next_step.y = (double)(cub->map_w) - 1.25;
+	c = cub->map[(int)(next_step.y)][(int)(next_step.x)];
+	if (ft_strchr(" 12", c))
+	{
+		if ((int)(player->x) != (int)(next_step.x))
+		{
+			if (vector.x)
+				next_step.x = (double)((int)(player->x) + 0.75);
+			else
+				next_step.x = (double)((int)(player->x) + 0.25);
+		}
+		if ((int)(player->y) != (int)(next_step.y))
+		{
+			if (vector.y)
+				next_step.y = (double)((int)(player->y) + 0.75);
+			else
+				next_step.y = (double)((int)(player->y) + 0.25);
+		}
+	}
+	if (next_step.x < (int)(next_step.x) + 0.25)
+	{
+		c = cub->map[(int)(next_step.y)][(int)(next_step.x) - 1];
+		if (ft_strchr(" 12", c))
+			next_step.x = (int)(next_step.x) + 0.25;
+	}
+	else if (next_step.x > (int)(next_step.x) + 0.75)
+	{
+		c = cub->map[(int)(next_step.y)][(int)(next_step.x) + 1];
+		if (ft_strchr(" 12", c))
+			next_step.x = (int)(next_step.x) + 0.75;
+	}
+	if (next_step.y < (int)(next_step.y) + 0.25)
+	{
+		c = cub->map[(int)(next_step.y) - 1][(int)(next_step.x)];
+		if (ft_strchr(" 12", c))
+			next_step.y = (int)(next_step.y) + 0.25;
+///*fix when going on diagonal on a sprite/wall but add another bug			
+		if (next_step.x < (int)(next_step.x) + 0.25)
+		{
+			c = cub->map[(int)(next_step.y) - 1][(int)(next_step.x) - 1];
+			if (ft_strchr(" 12", c))
+				next_step.y = (int)(next_step.y) + 0.25;
+		}
+		else if (next_step.x > (int)(next_step.x) + 0.75)
+		{
+			c = cub->map[(int)(next_step.y) - 1][(int)(next_step.x) + 1];
+			if (ft_strchr(" 12", c))
+				next_step.y = (int)(next_step.y) + 0.25;
+		}
+//*/
+	}
+	else if (next_step.y > (int)(next_step.y) + 0.75)
+	{
+		c = cub->map[(int)(next_step.y) + 1][(int)(next_step.x)];
+		if (ft_strchr(" 12", c))
+			next_step.y = (int)(next_step.y) + 0.75;
+///*fix when going on diagonal on a sprite/wall but add another bug			
+		if (next_step.x < (int)(next_step.x) + 0.25)
+		{
+			c = cub->map[(int)(next_step.y) + 1][(int)(next_step.x) - 1];
+			if (ft_strchr(" 12", c))
+				next_step.y = (int)(next_step.y) + 0.75;
+		}
+		else if (next_step.x > (int)(next_step.x) + 0.75)
+		{
+			c = cub->map[(int)(next_step.y) + 1][(int)(next_step.x) + 1];
+			if (ft_strchr(" 12", c))
+				next_step.y = (int)(next_step.y) + 0.75;
+		}
+//*/
+	}
+	player->x = next_step.x;
+	player->y = next_step.y;
+}
+
 void	move_advance(t_cub *cub, int forward, int side)
 {
 	t_pos	step;
@@ -42,23 +132,14 @@ void	move_advance(t_cub *cub, int forward, int side)
 	set_step_increm(step, &increm, cub);
 	step.x = cub->player.x + increm.x;
 	step.y = cub->player.y + increm.y;
-	if ((int)step.x > 0 && (int)step.x < cub->map_w - 1
-		&& cub->map[(int)cub->player.y][(int)step.x] != '1'
-		&& cub->map[(int)cub->player.y][(int)step.x] != ' '
-		&& cub->map[(int)cub->player.y][(int)step.x] != '2')
-		cub->player.x = step.x;
-	if ((int)step.y > 0 && (int)step.y < cub->map_h - 1
-		&& cub->map[(int)step.y][(int)cub->player.x] != '1'
-		&& cub->map[(int)step.y][(int)cub->player.x] != ' '
-		&& cub->map[(int)step.y][(int)cub->player.x] != '2')
-		cub->player.y = step.y;
+	set_next_step(step, &cub->player, cub);
 }
 
 void	rotate_dir(t_cub *cub, int direction)
 {
 	double	rot_speed;
 
-	rot_speed = cub->width / 10 + 1;
+	rot_speed = cub->width / 15 + 1;
 	rot_speed *= cub->ray.angle_increm;
 	cub->player.dir += (rot_speed * direction);
 	if (cub->player.dir < 0.0)
