@@ -35,81 +35,81 @@ void	set_next_step(t_pos next_step, t_pos *player, t_cub *cub)
 
 	vector.x = (next_step.x > player->x);
 	vector.y = (next_step.y > player->y);
-	if (next_step.x < 1.25)
-		next_step.x = 1.25;
-	else if (next_step.x >= (double)(cub->map_w) - 1.25)
-		next_step.x = (double)(cub->map_w) - 1.25;
-	if (next_step.y < 1.25)
-		next_step.y = 1.25;
-	else if (next_step.y >= (double)(cub->map_w) - 1.25)
-		next_step.y = (double)(cub->map_w) - 1.25;
+	if (next_step.x < 1.15)
+		next_step.x = 1.15;
+	else if (next_step.x >= (double)(cub->map_w) - 1.15)
+		next_step.x = (double)(cub->map_w) - 1.15;
+	if (next_step.y < 1.15)
+		next_step.y = 1.15;
+	else if (next_step.y >= (double)(cub->map_w) - 1.15)
+		next_step.y = (double)(cub->map_w) - 1.15;
 	c = cub->map[(int)(next_step.y)][(int)(next_step.x)];
 	if (ft_strchr(" 12", c))
 	{
 		if ((int)(player->x) != (int)(next_step.x))
 		{
 			if (vector.x)
-				next_step.x = (double)((int)(player->x) + 0.75);
+				next_step.x = (double)((int)(player->x) + 0.85);
 			else
-				next_step.x = (double)((int)(player->x) + 0.25);
+				next_step.x = (double)((int)(player->x) + 0.15);
 		}
 		if ((int)(player->y) != (int)(next_step.y))
 		{
 			if (vector.y)
-				next_step.y = (double)((int)(player->y) + 0.75);
+				next_step.y = (double)((int)(player->y) + 0.85);
 			else
-				next_step.y = (double)((int)(player->y) + 0.25);
+				next_step.y = (double)((int)(player->y) + 0.15);
 		}
 	}
-	if (next_step.x < (int)(next_step.x) + 0.25)
+	if (next_step.x < (int)(next_step.x) + 0.15)
 	{
 		c = cub->map[(int)(next_step.y)][(int)(next_step.x) - 1];
 		if (ft_strchr(" 12", c))
-			next_step.x = (int)(next_step.x) + 0.25;
+			next_step.x = (int)(next_step.x) + 0.15;
 	}
-	else if (next_step.x > (int)(next_step.x) + 0.75)
+	else if (next_step.x > (int)(next_step.x) + 0.85)
 	{
 		c = cub->map[(int)(next_step.y)][(int)(next_step.x) + 1];
 		if (ft_strchr(" 12", c))
-			next_step.x = (int)(next_step.x) + 0.75;
+			next_step.x = (int)(next_step.x) + 0.85;
 	}
-	if (next_step.y < (int)(next_step.y) + 0.25)
+	if (next_step.y < (int)(next_step.y) + 0.15)
 	{
 		c = cub->map[(int)(next_step.y) - 1][(int)(next_step.x)];
 		if (ft_strchr(" 12", c))
-			next_step.y = (int)(next_step.y) + 0.25;
+			next_step.y = (int)(next_step.y) + 0.15;
 ///*fix when going on diagonal on a sprite/wall but add another bug			
-		if (next_step.x < (int)(next_step.x) + 0.25)
+		if (next_step.x < (int)(next_step.x) + 0.15)
 		{
 			c = cub->map[(int)(next_step.y) - 1][(int)(next_step.x) - 1];
 			if (ft_strchr(" 12", c))
-				next_step.y = (int)(next_step.y) + 0.25;
+				next_step.y = (int)(next_step.y) + 0.15;
 		}
-		else if (next_step.x > (int)(next_step.x) + 0.75)
+		else if (next_step.x > (int)(next_step.x) + 0.85)
 		{
 			c = cub->map[(int)(next_step.y) - 1][(int)(next_step.x) + 1];
 			if (ft_strchr(" 12", c))
-				next_step.y = (int)(next_step.y) + 0.25;
+				next_step.y = (int)(next_step.y) + 0.15;
 		}
 //*/
 	}
-	else if (next_step.y > (int)(next_step.y) + 0.75)
+	else if (next_step.y > (int)(next_step.y) + 0.85)
 	{
 		c = cub->map[(int)(next_step.y) + 1][(int)(next_step.x)];
 		if (ft_strchr(" 12", c))
-			next_step.y = (int)(next_step.y) + 0.75;
+			next_step.y = (int)(next_step.y) + 0.85;
 ///*fix when going on diagonal on a sprite/wall but add another bug			
-		if (next_step.x < (int)(next_step.x) + 0.25)
+		if (next_step.x < (int)(next_step.x) + 0.15)
 		{
 			c = cub->map[(int)(next_step.y) + 1][(int)(next_step.x) - 1];
 			if (ft_strchr(" 12", c))
-				next_step.y = (int)(next_step.y) + 0.75;
+				next_step.y = (int)(next_step.y) + 0.85;
 		}
-		else if (next_step.x > (int)(next_step.x) + 0.75)
+		else if (next_step.x > (int)(next_step.x) + 0.85)
 		{
 			c = cub->map[(int)(next_step.y) + 1][(int)(next_step.x) + 1];
 			if (ft_strchr(" 12", c))
-				next_step.y = (int)(next_step.y) + 0.75;
+				next_step.y = (int)(next_step.y) + 0.85;
 		}
 //*/
 	}

@@ -43,8 +43,6 @@ int	argb_to_int(int a, int r, int g, int b)
 	return ((a << 24) + (r << 16) + (g << 8) + b);
 }
 
-#include <stdio.h>
-
 int		check_overflow(char *nb)
 {
 	char	*max_int;
@@ -69,5 +67,6 @@ int		check_overflow(char *nb)
 				&& nb[nb_len - 1] > max_int[max_len - 1])) 
 			ret = -1;
 	}
+	free(max_int);
 	return (ret);
 }
