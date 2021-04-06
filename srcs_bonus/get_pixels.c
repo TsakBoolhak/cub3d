@@ -60,8 +60,28 @@ char	*get_texture_pixel(int *y, t_cub *cub)
 	ratio.y = (double)(*y - ((cub->height - cub->true_wall_h) / 2));
 	ratio.y /= (double)cub->true_wall_h;
 	src = get_texture_data(cub, &ratio);
-	ret.y = (int)round(ratio.y);
-	ret.x = (int)round(ratio.x);
+	ret.y = (int)(ratio.y);
+	ret.x = (int)(ratio.x);
 	src.addr = src.addr + (ret.y * src.len + ret.x * (src.bpp / 8));
 	return ((char *)(src.addr));
+}
+
+#include <stdio.h>
+int		get_gun_pixel(int x, int y, int	gheight, int xstart, int xend, t_cub *cub)
+{
+	t_pos	ratio;
+	t_coord	ret;
+	t_data	src;
+	int		color;
+
+	ratio.x = (double)(x - xstart) / (double)(xend - xstart);
+	ratio.y = (double)(y - (cub->height - gheight)) / (double)gheight;
+	src = cub->gun;
+	ratio.x *= (src.len / (src.bpp / 8));
+	ratio.y *= src.height;
+	ret.y = (int)(ratio.y);
+	ret.x = (int)(ratio.x);
+	src.addr = src.addr + (ret.y * src.len + ret.x * (src.bpp / 8));
+	color = *(int *)src.addr;
+	return (color);
 }

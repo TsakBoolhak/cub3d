@@ -9,8 +9,6 @@ int	set_mini_map_color(int column, int line, char **map)
 	c = map[line][column];
 	if (c == '1' || c == ' ')
 		return (argb_to_int(0, 129, 136, 151));
-	else if (c == '2')
-		return (argb_to_int(0, 12, 111, 166));
 	else
 		return (argb_to_int(0, 10, 55, 134));
 }

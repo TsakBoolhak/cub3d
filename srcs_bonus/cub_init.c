@@ -35,7 +35,11 @@ int	cub_init(t_cub *cub)
 	ft_memset(cub, 0, sizeof(*cub));
 	cub->mlx = mlx_init();
 	if (!cub->mlx)
-		return (return_error("MEM ERROR: Couldn't allocate memory\n", -1));
+		return (return_error("Error\nCouldn't allocate memory\n", -1));
+	cub->gun.img = mlx_xpm_file_to_image(cub->mlx, "textures/jagpistol.xpm", &cub->gun.len, &cub->gun.height);
+	if (!cub->gun.img)
+		return (return_error("Error\nCouldn't import gun texture\n", -1));
+	cub->gun.addr = mlx_get_data_addr(cub->gun.img, &cub->gun.bpp, &cub->gun.len, &cub->gun.end);
 	return (0);
 }
 
@@ -61,6 +65,8 @@ void	free_cub(t_cub *cub)
 		free(cub->draw_buf);
 	if (cub->minmap.minimap.img)
 		mlx_destroy_image(cub->mlx, cub->minmap.minimap.img);
+	if (cub->gun.img)
+		mlx_destroy_image(cub->mlx, cub->gun.img);
 	if (cub->win)
 		mlx_destroy_window(cub->mlx, cub->win);
 	mlx_destroy_display(cub->mlx);

@@ -33,8 +33,6 @@ int	render_frame(void *cub_ptr)
 	mini_map_to_img(cub);
 	raycast_loop(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->screen.img, 0, 0);
-	if (cub->health.img.img)
-		mlx_put_image_to_window(cub->mlx, cub->win, cub->health.img.img, cub->health.pos.x, cub->health.pos.y);
 	if (cub->minmap.minimap.img)
 	{
 		player_color = argb_to_int(0, 255, 0, 0);

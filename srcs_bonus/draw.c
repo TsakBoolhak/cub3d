@@ -78,6 +78,31 @@ void	draw_sprites(int x, t_cub *cub)
 	}
 }
 
+void	draw_gun(int x, t_cub *cub)
+{
+	int	gwidth;
+	int	gheight;
+	int	xstart;
+	int	xend;
+	int	y;
+	int	color;
+
+	gwidth = cub->width / 3;
+	xstart = cub->width / 2 - (gwidth / 2);
+	xend = xstart + gwidth;
+	if (x < xstart || x > xend)
+		return ;
+	gheight = cub->height / 2;
+	y = cub->height - gheight;
+	while (y < cub->height)
+	{
+		color = get_gun_pixel(x, y, gheight, xstart, xend, cub);
+		if (color)
+			my_pixel_put(&cub->screen, x, y, color);
+		y++;
+	}
+}
+
 void	draw_wall_to_screen(int x, t_cub *cub)
 {
 	int	y;
@@ -89,4 +114,5 @@ void	draw_wall_to_screen(int x, t_cub *cub)
 	draw_wall(x, &y, wall_h, cub);
 	draw_ceil_or_floor(x, &y, cub, 1);
 	draw_sprites(x, cub);
+	draw_gun(x, cub);
 }

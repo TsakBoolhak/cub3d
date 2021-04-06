@@ -60,8 +60,8 @@ char	*get_texture_pixel(int *y, t_cub *cub)
 	ratio.y = (double)(*y - ((cub->height - cub->true_wall_h) / 2));
 	ratio.y /= (double)cub->true_wall_h;
 	src = get_texture_data(cub, &ratio);
-	ret.y = (int)round(ratio.y);
-	ret.x = (int)round(ratio.x);
+	ret.y = (int)(ratio.y);
+	ret.x = (int)(ratio.x);
 	src.addr = src.addr + (ret.y * src.len + ret.x * (src.bpp / 8));
 	return ((char *)(src.addr));
 }

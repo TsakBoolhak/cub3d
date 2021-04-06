@@ -16,13 +16,13 @@
 
 int	check_around_cell(int x, int y, t_cub *cub)
 {
-	if (x < cub->map_w - 1 && !ft_strchr("0123 NEWS", cub->map[y][x + 1]))
+	if (x < cub->map_w - 1 && !ft_strchr("012 NEWS", cub->map[y][x + 1]))
 		return (return_error("Error\nInvalid character in map\n", -1));
-	if (x > 0 && !ft_strchr("0123 NEWS", cub->map[y][x - 1]))
+	if (x > 0 && !ft_strchr("012 NEWS", cub->map[y][x - 1]))
 		return (return_error("Error\nInvalid character in map\n", -1));
-	if (y < cub->map_h - 1 && !ft_strchr("0123 NEWS", cub->map[y + 1][x]))
+	if (y < cub->map_h - 1 && !ft_strchr("012 NEWS", cub->map[y + 1][x]))
 		return (return_error("Error\nInvalid character in map\n", -1));
-	if (y > 0 && !ft_strchr("0123 NEWS", cub->map[y - 1][x]))
+	if (y > 0 && !ft_strchr("012 NEWS", cub->map[y - 1][x]))
 		return (return_error("Error\nInvalid character in map\n", -1));
 	if (x < cub->map_w - 1 && !ft_strchr(" 1", cub->map[y][x + 1]))
 		return (return_error("Error\nMap is open\n", -1));
@@ -81,28 +81,12 @@ int	set_sprite_position(int x, int y, t_cub *cub)
 	return (0);
 }
 
-int	check_door(int x, int y, t_cub *cub)
-{
-	char	news[4];
-
-	news[0] = (cub->map[y - 1][x] == '1');
-	news[1] = (cub->map[y][x + 1] == '1');
-	news[2] = (cub->map[y][x - 1] == '1');
-	news[3] = (cub->map[y + 1][x] == '1');
-	if ((news[0] && news[1]) || (news[0] && news[2]) || (news[0] && !news[3])
-		|| (news[1] && news[3]) || (news[1] && !news[2])
-		|| (news[2] && news[3]) || (news[2] && !news[1])
-		|| (news[3] && !news[0]) || news[0] + news[1] + news[2] + news[3] != 2)
-		return return_error("Error\nDoor isn't well placed\n", -1);
-	return (0);
-}
-
 int	ft_check_map_cell(int x, int y, t_cub *cub, int *spawn)
 {
 	int	ret;
 
 	ret = 0;
-	if (!ft_strchr("0123 NEWS", cub->map[y][x]))
+	if (!ft_strchr("012 NEWS", cub->map[y][x]))
 		return (return_error("Error\nInvalid character in map\n", -1));
 	else if ((!x || !y || x == cub->map_w - 1 || y == cub->map_h - 1)
 		&& cub->map[y][x] != '1' && cub->map[y][x] != ' ')
@@ -116,10 +100,8 @@ int	ft_check_map_cell(int x, int y, t_cub *cub, int *spawn)
 		*spawn = 1;
 		set_spawn(x, y, cub);
 	}
-	else if (cub->map[y][x] == '2' || cub->map[y][x] == '3')
+	else if (cub->map[y][x] == '2')
 		ret = set_sprite_position(x, y, cub);
-	if (cub->map[y][x] == '3' && ret != -1)
-		ret = check_door(x, y, cub);
 	return (ret);
 }
 

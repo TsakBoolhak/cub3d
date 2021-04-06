@@ -1,5 +1,5 @@
 SRCFOLD		= srcs/
-BONUSFOLD		= srcs_bonus/
+BONUSFOLD	= srcs_bonus/
 
 SRCS_BONUS	= ${BONUSFOLD}parser.c \
 			${BONUSFOLD}main.c \
@@ -85,7 +85,7 @@ clean_bonus:
 	@make clean --no-print-directory -C libft/
 
 fclean:			clean
-	${RM} ${NAME} ${NAME_BONUS}
+	${RM} ${NAME}
 	@make clean --no-print-directory  -C mlx_linux/
 	@make fclean --no-print-directory -C libft/
 
@@ -98,4 +98,4 @@ re:				fclean all
 
 re_bonus:		fclean_bonus bonus
 
-.PHONY:			all clean fclean re
+.PHONY:			all clean fclean re bonus clean_bonus fclean_bonus re_bonus
