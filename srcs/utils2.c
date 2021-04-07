@@ -43,9 +43,7 @@ int	argb_to_int(int a, int r, int g, int b)
 	return ((a << 24) + (r << 16) + (g << 8) + b);
 }
 
-#include <stdio.h>
-
-int		check_overflow(char *nb)
+int	check_overflow(char *nb)
 {
 	char	*max_int;
 	int		max_len;
@@ -65,8 +63,8 @@ int		check_overflow(char *nb)
 	else if (nb_len == max_len)
 	{
 		if (ft_atoi_n(max_int, max_len - 1) < ft_atoi_n(nb, nb_len - 1)
-			|| (ft_atoi_n(max_int, max_len - 1) == ft_atoi_n(nb, nb_len - 1) 
-				&& nb[nb_len - 1] > max_int[max_len - 1])) 
+			|| (ft_atoi_n(max_int, max_len - 1) == ft_atoi_n(nb, nb_len - 1)
+				&& nb[nb_len - 1] > max_int[max_len - 1]))
 			ret = -1;
 	}
 	return (ret);
