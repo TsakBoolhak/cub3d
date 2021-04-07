@@ -67,5 +67,6 @@ int	check_overflow(char *nb)
 			|| (tab[0] == tab[1] && nb[nb_len - 1] > max_int[max_len - 1]))
 			ret = -1;
 	}
+	free(max_int);
 	return (ret);
 }

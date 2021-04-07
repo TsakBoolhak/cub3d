@@ -82,18 +82,17 @@ int	check_colour_values(char **tab)
 		if (!value)
 			return (return_error("Error\nCouldn't allocate memory\n", -1));
 		else if (!*value)
-			return (return_error("Error\nMissing value in color\n", -1));
-		if (ft_strlen(value) > 3 || !ft_strisdigit(value))
 		{
 			free(value);
-			ft_putstr_fd("Error\nColor's values must be numbers", 2);
-			return (return_error(" included between 0 and 255\n", -1));
+			return (return_error("Error\nMissing value in color\n", -1));
 		}
 		rgb[i] = ft_atoi(value);
+		if (ft_strlen(value) > 3 || !ft_strisdigit(value) || rgb[i++] > 255)
+		{
+			free(value);
+			return (return_error("Error\nWrong value(s) for color's rgb", -1));
+		}
 		free(value);
-		if (rgb[i] > 255)
-			return (return_error("Error\nColor's value is above 255\n", -1));
-		i++;
 	}
 	return (argb_to_int(0, rgb[0], rgb[1], rgb[2]));
 }
@@ -113,13 +112,13 @@ int	set_colour(char *line, int elem, t_cub *cub)
 		return (return_error(" 0 and 255, separated by commas\n", 0));
 	}
 	color = check_colour_values(tab);
+	ft_free_tab((void **)tab);
 	if (color < 0)
 		return (0);
 	if (!elem)
 		cub->floor_rgb = color;
 	else
 		cub->ceil_rgb = color;
-	ft_free_tab((void **)tab);
 	return (1);
 }
 

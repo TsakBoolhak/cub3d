@@ -32,14 +32,19 @@ void	free_pos_tab(t_sprite **tab)
 
 int	cub_init(t_cub *cub)
 {
+	t_data	*gun;
+	char	*str;
+
 	ft_memset(cub, 0, sizeof(*cub));
 	cub->mlx = mlx_init();
 	if (!cub->mlx)
 		return (return_error("Error\nCouldn't allocate memory\n", -1));
-	cub->gun.img = mlx_xpm_file_to_image(cub->mlx, "textures/jagpistol.xpm", &cub->gun.len, &cub->gun.height);
-	if (!cub->gun.img)
+	str = "textures/jagpistol.xpm";
+	gun = &cub->gun;
+	gun->img = mlx_xpm_file_to_image(cub->mlx, str, &gun->len, &gun->height);
+	if (!gun->img)
 		return (return_error("Error\nCouldn't import gun texture\n", -1));
-	cub->gun.addr = mlx_get_data_addr(cub->gun.img, &cub->gun.bpp, &cub->gun.len, &cub->gun.end);
+	gun->addr = mlx_get_data_addr(gun->img, &gun->bpp, &gun->len, &gun->end);
 	return (0);
 }
 
@@ -61,8 +66,7 @@ void	free_cub(t_cub *cub)
 		free_pos_tab(cub->sprites);
 	if (cub->screen.img)
 		mlx_destroy_image(cub->mlx, cub->screen.img);
-	if (cub->draw_buf)
-		free(cub->draw_buf);
+	free(cub->draw_buf);
 	if (cub->minmap.minimap.img)
 		mlx_destroy_image(cub->mlx, cub->minmap.minimap.img);
 	if (cub->gun.img)

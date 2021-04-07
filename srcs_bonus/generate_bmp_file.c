@@ -70,7 +70,7 @@ int	write_into_bmp(int fd, t_bmp *bmp, t_cub *cub)
 	return (0);
 }
 
-int	generate_bmp_file(t_cub *cub, char *savename)
+int	generate_bmp_file(t_cub *cub, char *save)
 {
 	int		fd;
 	int		ret;
@@ -78,7 +78,7 @@ int	generate_bmp_file(t_cub *cub, char *savename)
 
 	get_first_image(cub);
 	init_header(&bmp, cub);
-	fd = open(savename, O_CREAT | O_WRONLY, S_IRWXU | S_IRWXG | S_IRWXO);
+	fd = open(save, O_CREAT | O_TRUNC | O_WRONLY, S_IRWXU | S_IRWXG | S_IRWXO);
 	if (fd < 0)
 		return_error("Error\nCouldn't create bmp file\n", -1);
 	ret = 0;

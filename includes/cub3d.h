@@ -41,7 +41,7 @@ int		prepare_run(t_cub *cub);
 void	init_header(t_bmp *bmp, t_cub *cub);
 void	get_first_image(t_cub *cub);
 int		write_into_bmp(int fd, t_bmp *bmp, t_cub *cub);
-int		generate_bmp_file(t_cub *cub, char *savename);
+int		generate_bmp_file(t_cub *cub, char *save);
 
 /*
 ***parser.c
