@@ -92,11 +92,11 @@ void	draw_sprites(int x, t_cub *cub)
 
 void	draw_gun(int x, t_cub *cub)
 {
-	int	gwidth;
-	int	gheight;
+	int		gwidth;
+	int		gheight;
 	t_coord	gun;
-	int	y;
-	int	color;
+	int		y;
+	int		color;
 
 	gwidth = cub->width / 3;
 	gun.x = cub->width / 2 - (gwidth / 2);
