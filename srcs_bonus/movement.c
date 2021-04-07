@@ -40,10 +40,10 @@ void	set_step_increm(t_pos step, t_pos *increm, t_cub *cub)
 	increm->y *= cub->movespeed;
 }
 
-void	init_next_step(t_coord *vector, t_pos *next_step, t_pos *player, t_cub *cub)
+void	init_next_step(t_coord *vect, t_pos *next_step, t_pos *play, t_cub *cub)
 {
-	vector->x = (next_step->x > player->x);
-	vector->y = (next_step->y > player->y);
+	vect->x = (next_step->x > play->x);
+	vect->y = (next_step->y > play->y);
 	if (next_step->x < 1.15)
 		next_step->x = 1.15;
 	else if (next_step->x >= (double)(cub->map_w) - 1.15)
@@ -54,26 +54,26 @@ void	init_next_step(t_coord *vector, t_pos *next_step, t_pos *player, t_cub *cub
 		next_step->y = (double)(cub->map_w) - 1.15;
 }
 
-void	check_step_collision(t_pos *next_step, t_pos *player, t_coord vector, t_cub *cub)
+void	check_step_collide(t_pos *next, t_pos *play, t_coord vect, t_cub *cub)
 {
 	char	c;
 
-	c = cub->map[(int)(next_step->y)][(int)(next_step->x)];
+	c = cub->map[(int)(next->y)][(int)(next->x)];
 	if (ft_strchr(" 12", c))
 	{
-		if ((int)(player->x) != (int)(next_step->x))
+		if ((int)(play->x) != (int)(next->x))
 		{
-			if (vector.x)
-				next_step->x = (double)((int)(player->x) + 0.85);
+			if (vect.x)
+				next->x = (double)((int)(play->x) + 0.85);
 			else
-				next_step->x = (double)((int)(player->x) + 0.15);
+				next->x = (double)((int)(play->x) + 0.15);
 		}
-		if ((int)(player->y) != (int)(next_step->y))
+		if ((int)(play->y) != (int)(next->y))
 		{
-			if (vector.y)
-				next_step->y = (double)((int)(player->y) + 0.85);
+			if (vect.y)
+				next->y = (double)((int)(play->y) + 0.85);
 			else
-				next_step->y = (double)((int)(player->y) + 0.15);
+				next->y = (double)((int)(play->y) + 0.15);
 		}
 	}
 }
@@ -110,7 +110,7 @@ void	set_next_step(t_pos next_step, t_pos *player, t_cub *cub)
 	t_coord	vector;
 
 	init_next_step(&vector, &next_step, player, cub);
-	check_step_collision(&next_step, player, vector, cub);
+	check_step_collide(&next_step, player, vector, cub);
 	if (next_step.x < (int)(next_step.x) + 0.15)
 	{
 		c = cub->map[(int)(next_step.y)][(int)(next_step.x) - 1];
