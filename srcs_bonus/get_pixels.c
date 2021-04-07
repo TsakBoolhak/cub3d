@@ -78,14 +78,18 @@ char	*get_texture_pixel(int *y, t_cub *cub)
 	return ((char *)(src.addr));
 }
 
-int	get_gun_pixel(int x, int y, int	gheight, int xstart, int xend, t_cub *cub)
+int	get_gun_pixel(int x, int y, int	gheight, t_cub *cub)
 {
 	t_pos	ratio;
 	t_coord	ret;
 	t_data	src;
-	int		color;
+	t_coord	gun;
+	int		gwidth;
 
-	ratio.x = (double)(x - xstart) / (double)(xend - xstart);
+	gwidth = cub->width / 3;
+	gun.x = cub->width / 2 - (gwidth / 2);
+	gun.y = gun.x + gwidth;
+	ratio.x = (double)(x - gun.x) / (double)(gun.y - gun.x);
 	ratio.y = (double)(y - (cub->height - gheight)) / (double)gheight;
 	src = cub->gun;
 	ratio.x *= (src.len / (src.bpp / 8));
@@ -93,6 +97,5 @@ int	get_gun_pixel(int x, int y, int	gheight, int xstart, int xend, t_cub *cub)
 	ret.y = (int)(ratio.y);
 	ret.x = (int)(ratio.x);
 	src.addr = src.addr + (ret.y * src.len + ret.x * (src.bpp / 8));
-	color = *(int *)src.addr;
-	return (color);
+	return (*(int *)src.addr);
 }

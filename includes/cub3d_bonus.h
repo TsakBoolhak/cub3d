@@ -174,5 +174,5 @@ void	check_actions(t_cub *cub);
 int		render_frame(void *cub_ptr);
 int		run_cub(t_cub *cub);
 
-int		get_gun_pixel(int x, int y, int	gheight, int xstart, int xend, t_cub *cub);
+int		get_gun_pixel(int x, int y, int	gheight, t_cub *cub);
 #endif

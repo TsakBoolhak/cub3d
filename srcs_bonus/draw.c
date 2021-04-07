@@ -94,21 +94,20 @@ void	draw_gun(int x, t_cub *cub)
 {
 	int	gwidth;
 	int	gheight;
-	int	xstart;
-	int	xend;
+	t_coord	gun;
 	int	y;
 	int	color;
 
 	gwidth = cub->width / 3;
-	xstart = cub->width / 2 - (gwidth / 2);
-	xend = xstart + gwidth;
-	if (x < xstart || x > xend)
+	gun.x = cub->width / 2 - (gwidth / 2);
+	gun.y = gun.x + gwidth;
+	if (x < gun.x || x > gun.y)
 		return ;
 	gheight = cub->height / 2;
 	y = cub->height - gheight;
 	while (y < cub->height)
 	{
-		color = get_gun_pixel(x, y, gheight, xstart, xend, cub);
+		color = get_gun_pixel(x, y, gheight, cub);
 		if (color)
 			my_pixel_put(&cub->screen, x, y, color);
 		y++;
