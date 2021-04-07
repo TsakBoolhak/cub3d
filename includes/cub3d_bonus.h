@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acabiac <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 14:39:46 by acabiac           #+#    #+#             */
-/*   Updated: 2021/02/05 20:17:16 by acabiac          ###   ########.fr       */
+/*   Updated: 2021/04/07 14:00:31 by acabiac          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,6 @@ t_data	get_texture_data(t_cub *cub, t_pos *ratio);
 void	check_actions(t_cub *cub);
 int		render_frame(void *cub_ptr);
 int		run_cub(t_cub *cub);
-
 
 int		get_gun_pixel(int x, int y, int	gheight, int xstart, int xend, t_cub *cub);
 #endif

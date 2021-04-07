@@ -1,5 +1,17 @@
-#ifndef STRUCTURES_H
-# define STRUCTURES_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structures_bonus.h                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acabiac <acabiac@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/07 13:58:19 by acabiac           #+#    #+#             */
+/*   Updated: 2021/04/07 13:59:05 by acabiac          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef STRUCTURES_BONUS_H
+# define STRUCTURES_BONUS_H
 # include <stdint.h>
 
 typedef struct s_data
