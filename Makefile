@@ -10,6 +10,7 @@ SRCS_BONUS	= ${BONUSFOLD}parser.c \
 			${BONUSFOLD}utils.c \
 			${BONUSFOLD}utils2.c \
 			${BONUSFOLD}utils3.c \
+			${BONUSFOLD}utils4.c \
 			${BONUSFOLD}draw.c \
 			${BONUSFOLD}draw_utils.c \
 			${BONUSFOLD}movement.c \

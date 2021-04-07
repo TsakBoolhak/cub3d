@@ -90,30 +90,6 @@ void	draw_sprites(int x, t_cub *cub)
 	}
 }
 
-void	draw_gun(int x, t_cub *cub)
-{
-	int		gwidth;
-	int		gheight;
-	t_coord	gun;
-	int		y;
-	int		color;
-
-	gwidth = cub->width / 3;
-	gun.x = cub->width / 2 - (gwidth / 2);
-	gun.y = gun.x + gwidth;
-	if (x < gun.x || x > gun.y)
-		return ;
-	gheight = cub->height / 2;
-	y = cub->height - gheight;
-	while (y < cub->height)
-	{
-		color = get_gun_pixel(x, y, gheight, cub);
-		if (color)
-			my_pixel_put(&cub->screen, x, y, color);
-		y++;
-	}
-}
-
 void	draw_wall_to_screen(int x, t_cub *cub)
 {
 	int	y;
