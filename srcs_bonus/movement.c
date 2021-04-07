@@ -90,7 +90,6 @@ void	set_next_step(t_pos next_step, t_pos *player, t_cub *cub)
 		c = cub->map[(int)(next_step.y) - 1][(int)(next_step.x)];
 		if (ft_strchr(" 12", c))
 			next_step.y = (int)(next_step.y) + 0.15;
-///*fix when going on diagonal on a sprite/wall but add another bug			
 		if (next_step.x < (int)(next_step.x) + 0.15)
 		{
 			c = cub->map[(int)(next_step.y) - 1][(int)(next_step.x) - 1];
@@ -103,14 +102,12 @@ void	set_next_step(t_pos next_step, t_pos *player, t_cub *cub)
 			if (ft_strchr(" 12", c))
 				next_step.y = (int)(next_step.y) + 0.15;
 		}
-//*/
 	}
 	else if (next_step.y > (int)(next_step.y) + 0.85)
 	{
 		c = cub->map[(int)(next_step.y) + 1][(int)(next_step.x)];
 		if (ft_strchr(" 12", c))
 			next_step.y = (int)(next_step.y) + 0.85;
-///*fix when going on diagonal on a sprite/wall but add another bug			
 		if (next_step.x < (int)(next_step.x) + 0.15)
 		{
 			c = cub->map[(int)(next_step.y) + 1][(int)(next_step.x) - 1];
@@ -123,7 +120,6 @@ void	set_next_step(t_pos next_step, t_pos *player, t_cub *cub)
 			if (ft_strchr(" 12", c))
 				next_step.y = (int)(next_step.y) + 0.85;
 		}
-//*/
 	}
 	player->x = next_step.x;
 	player->y = next_step.y;

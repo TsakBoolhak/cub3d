@@ -100,7 +100,7 @@ int	map_parser(int fd, char **line, t_cub *cub)
 		if (ret < 0)
 			return (return_error("Error\nCouldn't read file\n", -1));
 		else if (ret > 0 && **line)
-			break;
+			break ;
 	}
 	if (!ret)
 		return (return_error("Error\nMap is empty\n", -1));

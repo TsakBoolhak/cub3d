@@ -78,8 +78,7 @@ char	*get_texture_pixel(int *y, t_cub *cub)
 	return ((char *)(src.addr));
 }
 
-#include <stdio.h>
-int		get_gun_pixel(int x, int y, int	gheight, int xstart, int xend, t_cub *cub)
+int	get_gun_pixel(int x, int y, int	gheight, int xstart, int xend, t_cub *cub)
 {
 	t_pos	ratio;
 	t_coord	ret;
