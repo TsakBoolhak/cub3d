@@ -182,7 +182,7 @@ double	get_rad_for_y_cross(double dir);
 /*
 ***utils4.c
 */
-void	init_next_step(t_coord *vect, t_pos *next_step, t_pos *play, t_cub *cub);
+void	init_next_step(t_coord *vect, t_pos *next, t_pos *play, t_cub *cub);
 void	check_step_collide(t_pos *next, t_pos *play, t_coord vect, t_cub *cub);
 void	check_up_n_down(t_pos *next_step, int dir, t_cub *cub);
 void	set_next_step(t_pos next_step, t_pos *player, t_cub *cub);

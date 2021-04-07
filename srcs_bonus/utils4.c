@@ -1,18 +1,18 @@
 #include "cub3d_bonus.h"
 #include "libft.h"
 
-void	init_next_step(t_coord *vect, t_pos *next_step, t_pos *play, t_cub *cub)
+void	init_next_step(t_coord *vect, t_pos *next, t_pos *play, t_cub *cub)
 {
-	vect->x = (next_step->x > play->x);
-	vect->y = (next_step->y > play->y);
-	if (next_step->x < 1.15)
-		next_step->x = 1.15;
-	else if (next_step->x >= (double)(cub->map_w) - 1.15)
-		next_step->x = (double)(cub->map_w) - 1.15;
-	if (next_step->y < 1.15)
-		next_step->y = 1.15;
-	else if (next_step->y >= (double)(cub->map_w) - 1.15)
-		next_step->y = (double)(cub->map_w) - 1.15;
+	vect->x = (next->x > play->x);
+	vect->y = (next->y > play->y);
+	if (next->x < 1.15)
+		next->x = 1.15;
+	else if (next->x >= (double)(cub->map_w) - 1.15)
+		next->x = (double)(cub->map_w) - 1.15;
+	if (next->y < 1.15)
+		next->y = 1.15;
+	else if (next->y >= (double)(cub->map_w) - 1.15)
+		next->y = (double)(cub->map_w) - 1.15;
 }
 
 void	check_step_collide(t_pos *next, t_pos *play, t_coord vect, t_cub *cub)
