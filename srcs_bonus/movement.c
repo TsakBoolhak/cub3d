@@ -40,22 +40,6 @@ void	set_step_increm(t_pos step, t_pos *increm, t_cub *cub)
 	increm->y *= cub->movespeed;
 }
 
-void	check_step(t_coord vect, t_pos *step, t_pos *increm, t_cub *cub)
-{
-	t_pos	player;
-	
-	player = cub->player;
-	if ((vect.x && step->x < player.x) || (vect.y && step->y < player.y)
-		|| (!vect.x && step->x > player.x) || (!vect.y && step->y > player.y))
-	{
-		cub->movespeed = 0.25;
-		set_step_increm(*step, increm, cub);
-		step->x = cub->player.x + increm->x;
-		step->y = cub->player.y + increm->y;
-		set_next_step(step, &cub->player, cub);
-	}
-}
-
 void	move_advance(t_cub *cub, int forward, int side)
 {
 	t_pos	step;

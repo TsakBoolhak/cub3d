@@ -13,6 +13,34 @@
 #include <mlx.h>
 #include "cub3d_bonus.h"
 
+void	set_shadows(int *color, double ratio)
+{
+	int	r;
+	int	g;
+	int	b;
+
+	r = (*color & 0xFF0000) * ratio;
+	g = (*color & 0xFF00) * ratio;
+	b = (*color & 0xFF) * ratio;
+	*color = 0xFF000000 | (r & 0xFF0000) | (g & 0xFF00) | (b & 0xFF);
+}
+
+void	check_step(t_coord vect, t_pos *step, t_pos *increm, t_cub *cub)
+{
+	t_pos	player;
+
+	player = cub->player;
+	if ((vect.x && step->x < player.x) || (vect.y && step->y < player.y)
+		|| (!vect.x && step->x > player.x) || (!vect.y && step->y > player.y))
+	{
+		cub->movespeed = 0.25;
+		set_step_increm(*step, increm, cub);
+		step->x = cub->player.x + increm->x;
+		step->y = cub->player.y + increm->y;
+		set_next_step(step, &cub->player, cub);
+	}
+}
+
 void	check_actions(t_cub *cub)
 {
 	if (cub->action.sprint)

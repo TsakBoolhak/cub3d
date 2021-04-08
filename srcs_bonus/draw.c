@@ -20,18 +20,6 @@ void	my_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	set_shadows(int *color, double ratio)
-{
-	int	r;
-	int	g;
-	int	b;
-
-	r = (*color & 0xFF0000) * ratio;
-	g = (*color & 0xFF00) * ratio;
-	b = (*color & 0xFF) * ratio;
-	*color = 0xFF000000 | (r & 0xFF0000) | (g & 0xFF00) | (b & 0xFF);
-}
-
 void	draw_ceil_or_floor(int x, int *y, t_cub *cub, int floor)
 {
 	int	wall_h;

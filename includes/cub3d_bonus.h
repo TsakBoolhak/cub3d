@@ -148,6 +148,8 @@ void	set_sprite_dist(t_coord	sprite, t_pos *hit, t_cub *cub);
 /*
 ***run_cub.c
 */
+void	set_shadows(int *color, double ratio);
+void	check_step(t_coord vect, t_pos *step, t_pos *increm, t_cub *cub);
 void	check_actions(t_cub *cub);
 int		render_frame(void *cub_ptr);
 int		run_cub(t_cub *cub);
