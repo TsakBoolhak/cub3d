@@ -16,9 +16,9 @@
 void	check_actions(t_cub *cub)
 {
 	if (cub->action.sprint)
-		cub->movespeed = 0.45;
+		cub->movespeed = 0.375;
 	else
-		cub->movespeed = 0.3;
+		cub->movespeed = 0.25;
 	if (cub->action.rotate_left)
 		rotate_dir(cub, -1);
 	if (cub->action.rotate_right)
