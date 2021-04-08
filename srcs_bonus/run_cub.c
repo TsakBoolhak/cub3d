@@ -15,6 +15,10 @@
 
 void	check_actions(t_cub *cub)
 {
+	if (cub->action.sprint)
+		cub->movespeed = 0.45;
+	else
+		cub->movespeed = 0.3;
 	if (cub->action.rotate_left)
 		rotate_dir(cub, -1);
 	if (cub->action.rotate_right)
@@ -60,6 +64,7 @@ int	run_cub(t_cub *cub)
 
 	if (prepare_run(cub) < 0)
 		return (-1);
+	cub->movespeed = 0.20;
 	img = &cub->screen;
 	img->img = mlx_new_image(cub->mlx, cub->width, cub->height);
 	if (!img->img)
@@ -68,7 +73,6 @@ int	run_cub(t_cub *cub)
 		return (return_error("ERROR: Couldnt create the game render\n", -1));
 	}
 	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->len, &img->end);
-	cub->movespeed = 0.15;
 	mlx_loop_hook(cub->mlx, &render_frame, cub);
 	mlx_hook(cub->win, 2, 1L << 0, &handle_keypress, cub);
 	mlx_hook(cub->win, 3, 1L << 1, &handle_keyrelease, cub);

@@ -22,12 +22,18 @@ t_pos	closest_hit(t_pos orig, t_pos x_pos, t_pos y_pos, t_cub *cub)
 	if (dist.x < dist.y)
 	{
 		cub->ray.hit_dist = dist.x;
+		cub->ray.shadow_ratio = 8 / dist.x;
+		if (cub->ray.shadow_ratio > 1.0)
+			cub->ray.shadow_ratio = 1.0;
 		cub->ray.side = 0;
 		return (x_pos);
 	}
 	else
 	{
 		cub->ray.hit_dist = dist.y;
+		cub->ray.shadow_ratio = 8 / dist.y;
+		if (cub->ray.shadow_ratio > 1.0)
+			cub->ray.shadow_ratio = 1.0;
 		cub->ray.side = 1;
 		return (y_pos);
 	}

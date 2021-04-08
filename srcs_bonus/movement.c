@@ -62,7 +62,7 @@ void	rotate_dir(t_cub *cub, int direction)
 {
 	double	rot_speed;
 
-	rot_speed = cub->width / 15 + 1;
+	rot_speed = (cub->width / 8 + 1) * cub->movespeed;
 	rot_speed *= cub->ray.angle_increm;
 	cub->player.dir += (rot_speed * direction);
 	if (cub->player.dir < 0.0)
@@ -90,6 +90,8 @@ int	handle_keypress(int key, void *cub_ptr)
 		cub->action.move_right = 1;
 	if (key == 113)
 		cub->action.move_left = 1;
+	if (key == 65505)
+		cub->action.sprint = 1;
 	return (0);
 }
 
@@ -110,5 +112,7 @@ int	handle_keyrelease(int key, void *cub_ptr)
 		cub->action.move_right = 0;
 	if (key == 113)
 		cub->action.move_left = 0;
+	if (key == 65505)
+		cub->action.sprint = 0;
 	return (0);
 }

@@ -20,6 +20,16 @@ void	my_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+void	set_shadows(int *color, double ratio)
+{
+	int rgb[3];
+
+	rgb[0] = (*color & 0xFF0000) * ratio; 
+	rgb[1] = (*color & 0xFF00) * ratio; 
+	rgb[2] = (*color & 0xFF) * ratio; 
+	*color = 0xFF000000 | (rgb[0] & 0xFF0000) | (rgb[1] & 0xFF00) | (rgb[2] & 0xFF);
+}
+
 void	draw_ceil_or_floor(int x, int *y, t_cub *cub, int floor)
 {
 	int	wall_h;
@@ -55,6 +65,7 @@ void	draw_wall(int x, int *y, int wall_h, t_cub *cub)
 	{
 		src = get_texture_pixel(y, cub);
 		color = *(int *)src;
+		set_shadows(&color, cub->ray.shadow_ratio);
 		dst = screen->addr + (*y * screen->len + x * (screen->bpp / 8));
 		*(int *)dst = color;
 		(*y)++;

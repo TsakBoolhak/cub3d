@@ -58,6 +58,7 @@ typedef struct s_ray
 	t_coord	vect;
 	t_pos	hit;
 	int		side;
+	double	shadow_ratio;
 }t_ray;
 
 typedef struct s_action
@@ -68,6 +69,7 @@ typedef struct s_action
 	int	move_left;
 	int	move_forward;
 	int	move_backward;
+	int	sprint;
 	int	exit;
 }t_action;
 
